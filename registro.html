@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registro | Conecta Fútbol</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            <span>⚽</span>
+            <h1>Conecta Fútbol</h1>
+        </div>
+
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="login.html">Iniciar sesión</a>
+        </nav>
+
+    </header>
+
+    <main class="contenedor-formulario">
+
+        <section class="formulario-card">
+
+            <h2>Crear una cuenta</h2>
+
+            <p>
+                Completá tus datos para comenzar a registrar tu carrera deportiva.
+            </p>
+
+            <form id="registroForm">
+
+                <div class="grupo-input">
+
+                    <label for="nombre">Nombre completo</label>
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        required
+                        placeholder="Ej: Micaela López">
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label for="email">Correo electrónico</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        placeholder="ejemplo@email.com">
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label for="password">Contraseña</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        minlength="6"
+                        placeholder="Mínimo 6 caracteres">
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label for="edad">Edad</label>
+
+                    <input
+                        type="number"
+                        id="edad"
+                        name="edad"
+                        min="10"
+                        max="60"
+                        required>
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label for="posicion">Posición</label>
+
+                    <select id="posicion" name="posicion" required>
+
+                        <option value="">Seleccionar</option>
+
+                        <option>Arquera</option>
+
+                        <option>Defensora</option>
+
+                        <option>Volante</option>
+
+                        <option>Delantera</option>
+
+                    </select>
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label for="pierna">Pierna hábil</label>
+
+                    <select id="pierna" name="pierna">
+
+                        <option>Derecha</option>
+
+                        <option>Izquierda</option>
+
+                        <option>Ambas</option>
+
+                    </select>
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label for="altura">Altura (cm)</label>
+
+                    <input
+                        type="number"
+                        id="altura"
+                        name="altura"
+                        min="120"
+                        max="220">
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label for="equipo">Equipo actual</label>
+
+                    <input
+                        type="text"
+                        id="equipo"
+                        name="equipo"
+                        placeholder="Nombre del equipo">
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label for="provincia">Provincia</label>
+
+                    <input
+                        type="text"
+                        id="provincia"
+                        name="provincia">
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label for="bio">Descripción</label>
+
+                    <textarea
+                        id="bio"
+                        name="bio"
+                        rows="4"
+                        placeholder="Contanos un poco sobre vos..."></textarea>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn-principal">
+
+                    Registrarse
+
+                </button>
+
+            </form>
+
+            <div id="mensajeRegistro"></div>
+
+            <p class="texto-login">
+
+                ¿Ya tenés cuenta?
+
+                <a href="login.html">
+                    Iniciar sesión
+                </a>
+
+            </p>
+
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="js/registro.js"></script>
+
+</body>
+
+</html>

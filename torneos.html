@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torneos | Conecta Fútbol</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <span>⚽</span>
+        <h1>En cancha</h1>
+    </div>
+
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="partidos.html">Partidos</a>
+        <a href="estadisticas.html">Estadísticas</a>
+        <button id="cerrarSesion" class="btn-nav">Cerrar sesión</button>
+    </nav>
+</header>
+
+<main class="torneos-container">
+
+    <section class="formulario-torneo">
+        <h2>Registrar torneo</h2>
+
+        <form id="torneoForm">
+
+            <div class="grid-formulario">
+
+                <div class="grupo-input">
+                    <label for="nombreTorneo">Nombre del torneo</label>
+                    <input type="text" id="nombreTorneo" required placeholder="Ej: Liga Municipal">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="equipoTorneo">Equipo</label>
+                    <input type="text" id="equipoTorneo" placeholder="Equipo con el que participaste">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="categoriaTorneo">Categoría</label>
+                    <input type="text" id="categoriaTorneo" placeholder="Ej: Femenino libre">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="fechaInicio">Fecha de inicio</label>
+                    <input type="date" id="fechaInicio">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="fechaFin">Fecha de finalización</label>
+                    <input type="date" id="fechaFin">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="estadoTorneo">Estado</label>
+                    <select id="estadoTorneo">
+                        <option>En curso</option>
+                        <option>Finalizado</option>
+                        <option>Próximo</option>
+                    </select>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="partidosTorneo">Partidos jugados</label>
+                    <input type="number" id="partidosTorneo" min="0" value="0">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="golesTorneo">Goles</label>
+                    <input type="number" id="golesTorneo" min="0" value="0">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="asistenciasTorneo">Asistencias</label>
+                    <input type="number" id="asistenciasTorneo" min="0" value="0">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="posicionFinal">Posición final</label>
+                    <input type="text" id="posicionFinal" placeholder="Ej: 2° puesto">
+                </div>
+
+            </div>
+
+            <div class="grupo-input">
+                <label for="logrosTorneo">Logros o comentarios</label>
+                <textarea id="logrosTorneo" rows="5" placeholder="Ej: goleadora del torneo, campeonas, mejor partido, etc."></textarea>
+            </div>
+
+            <button type="submit" class="btn-principal">
+                Guardar torneo
+            </button>
+
+        </form>
+    </section>
+
+    <section class="historial-torneos">
+        <h2>Historial de torneos</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Torneo</th>
+                    <th>Equipo</th>
+                    <th>Categoría</th>
+                    <th>Estado</th>
+                    <th>Partidos</th>
+                    <th>Goles</th>
+                    <th>Posición final</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody id="tablaTorneos">
+            </tbody>
+        </table>
+    </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="module" src="js/torneos.js"></script>
+
+</body>
+</html>

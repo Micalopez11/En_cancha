@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Iniciar sesión | Conecta Fútbol</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+
+            <span>⚽</span>
+
+            <h1>Conecta Fútbol</h1>
+
+        </div>
+
+        <nav>
+
+            <a href="index.html">Inicio</a>
+
+            <a href="registro.html">Registrarse</a>
+
+        </nav>
+
+    </header>
+
+    <main class="contenedor-formulario">
+
+        <section class="formulario-card">
+
+            <h2>Iniciar sesión</h2>
+
+            <p>
+                Accedé a tu perfil deportivo.
+            </p>
+
+            <form id="loginForm">
+
+                <div class="grupo-input">
+
+                    <label for="email">
+                        Correo electrónico
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        required
+                        placeholder="ejemplo@email.com">
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label for="password">
+                        Contraseña
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        required
+                        placeholder="Ingresá tu contraseña">
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn-principal">
+
+                    Iniciar sesión
+
+                </button>
+
+            </form>
+
+            <div id="mensajeLogin"></div>
+
+            <p class="texto-login">
+
+                ¿Todavía no tenés una cuenta?
+
+                <a href="registro.html">
+
+                    Registrate aquí
+
+                </a>
+
+            </p>
+
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="js/login.js"></script>
+
+</body>
+
+</html>

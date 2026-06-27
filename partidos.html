@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Partidos | Conecta Fútbol</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+
+            <span>⚽</span>
+
+            <h1>Conecta Fútbol</h1>
+
+        </div>
+
+        <nav>
+
+            <a href="dashboard.html">Dashboard</a>
+
+            <a href="perfil.html">Mi perfil</a>
+
+            <button id="cerrarSesion" class="btn-nav">
+
+                Cerrar sesión
+
+            </button>
+
+        </nav>
+
+    </header>
+
+    <main class="partidos-container">
+
+        <section class="formulario-partido">
+
+            <h2>Registrar nuevo partido</h2>
+
+            <form id="partidoForm">
+
+                <div class="grid-formulario">
+
+                    <div class="grupo-input">
+
+                        <label>Fecha</label>
+
+                        <input
+                            type="date"
+                            id="fecha"
+                            required>
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Torneo</label>
+
+                        <input
+                            type="text"
+                            id="torneo"
+                            placeholder="Ej: Liga Municipal">
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Equipo propio</label>
+
+                        <input
+                            type="text"
+                            id="equipo">
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Equipo rival</label>
+
+                        <input
+                            type="text"
+                            id="rival"
+                            required>
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Resultado</label>
+
+                        <select id="resultado">
+
+                            <option>Victoria</option>
+
+                            <option>Empate</option>
+
+                            <option>Derrota</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Marcador</label>
+
+                        <input
+                            type="text"
+                            id="marcador"
+                            placeholder="Ej: 3 - 2">
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Goles</label>
+
+                        <input
+                            type="number"
+                            id="goles"
+                            value="0"
+                            min="0">
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Asistencias</label>
+
+                        <input
+                            type="number"
+                            id="asistencias"
+                            value="0"
+                            min="0">
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Minutos jugados</label>
+
+                        <input
+                            type="number"
+                            id="minutos"
+                            value="90"
+                            min="0">
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Posición</label>
+
+                        <select id="posicion">
+
+                            <option>Arquera</option>
+
+                            <option>Defensora</option>
+
+                            <option>Volante</option>
+
+                            <option>Delantera</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Cancha</label>
+
+                        <input
+                            type="text"
+                            id="cancha"
+                            placeholder="Nombre de la cancha">
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Ciudad</label>
+
+                        <input
+                            type="text"
+                            id="ciudad">
+
+                    </div>
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label>Observaciones</label>
+
+                    <textarea
+                        id="observaciones"
+                        rows="5"
+                        placeholder="Comentarios del partido..."></textarea>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn-principal">
+
+                    Guardar partido
+
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="historial-partidos">
+
+            <h2>Historial de partidos</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Fecha</th>
+
+                        <th>Rival</th>
+
+                        <th>Torneo</th>
+
+                        <th>Resultado</th>
+
+                        <th>Marcador</th>
+
+                        <th>Goles</th>
+
+                        <th>Asistencias</th>
+
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaPartidos">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="js/partidos.js"></script>
+
+</body>
+
+</html>

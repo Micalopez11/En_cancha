@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Conecta Fútbol</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            <span>⚽</span>
+            <h1>Conecta Fútbol</h1>
+        </div>
+
+        <nav>
+
+            <a href="perfil.html">Mi perfil</a>
+
+            <button id="cerrarSesion" class="btn-nav">
+                Cerrar sesión
+            </button>
+
+        </nav>
+
+    </header>
+
+    <main class="dashboard">
+
+        <aside class="sidebar">
+
+            <h2>Menú</h2>
+
+            <ul>
+
+                <li>
+                    <a href="dashboard.html">🏠 Inicio</a>
+                </li>
+
+                <li>
+                    <a href="perfil.html">👤 Mi perfil</a>
+                </li>
+
+                <li>
+                    <a href="partidos.html">⚽ Partidos</a>
+                </li>
+
+                <li>
+                    <a href="estadisticas.html">📈 Estadísticas</a>
+                </li>
+
+                <li>
+                    <a href="torneos.html">🏆 Torneos</a>
+                </li>
+
+                <li>
+                    <a href="mapa.html">🗺️ Canchas</a>
+                </li>
+
+            </ul>
+
+        </aside>
+
+        <section class="contenido-dashboard">
+
+            <div class="bienvenida">
+
+                <h2>
+
+                    ¡Bienvenida,
+
+                    <span id="nombreUsuario">
+
+                        Jugadora
+
+                    </span>!
+
+                </h2>
+
+                <p>
+
+                    Desde este panel podrás administrar toda tu información deportiva.
+
+                </p>
+
+            </div>
+
+            <section class="resumen">
+
+                <div class="card-resumen">
+
+                    <h3>⚽ Partidos</h3>
+
+                    <p id="totalPartidos">0</p>
+
+                </div>
+
+                <div class="card-resumen">
+
+                    <h3>🥅 Goles</h3>
+
+                    <p id="totalGoles">0</p>
+
+                </div>
+
+                <div class="card-resumen">
+
+                    <h3>🎯 Asistencias</h3>
+
+                    <p id="totalAsistencias">0</p>
+
+                </div>
+
+                <div class="card-resumen">
+
+                    <h3>🏆 Torneos</h3>
+
+                    <p id="totalTorneos">0</p>
+
+                </div>
+
+            </section>
+
+            <section class="acciones">
+
+                <h2>Accesos rápidos</h2>
+
+                <div class="grid-acciones">
+
+                    <a href="partidos.html" class="accion">
+
+                        ➕
+
+                        <h3>Registrar partido</h3>
+
+                        <p>
+
+                            Agregar un nuevo partido jugado.
+
+                        </p>
+
+                    </a>
+
+                    <a href="estadisticas.html" class="accion">
+
+                        📈
+
+                        <h3>Ver estadísticas</h3>
+
+                        <p>
+
+                            Analizar tu rendimiento deportivo.
+
+                        </p>
+
+                    </a>
+
+                    <a href="torneos.html" class="accion">
+
+                        🏆
+
+                        <h3>Mis torneos</h3>
+
+                        <p>
+
+                            Consultar los torneos registrados.
+
+                        </p>
+
+                    </a>
+
+                    <a href="mapa.html" class="accion">
+
+                        🗺️
+
+                        <h3>Mapa de canchas</h3>
+
+                        <p>
+
+                            Visualizar dónde jugaste.
+
+                        </p>
+
+                    </a>
+
+                </div>
+
+            </section>
+
+            <section class="actividad-reciente">
+
+                <h2>Actividad reciente</h2>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Fecha</th>
+
+                            <th>Rival</th>
+
+                            <th>Resultado</th>
+
+                            <th>Goles</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaActividad">
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="js/dashboard.js"></script>
+
+</body>
+
+</html>

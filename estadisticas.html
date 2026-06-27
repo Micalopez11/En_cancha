@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Estadísticas | Conecta Fútbol</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <span>⚽</span>
+
+        <h1>Conecta Fútbol</h1>
+
+    </div>
+
+    <nav>
+
+        <a href="dashboard.html">Dashboard</a>
+
+        <a href="partidos.html">Partidos</a>
+
+        <button id="cerrarSesion" class="btn-nav">
+
+            Cerrar sesión
+
+        </button>
+
+    </nav>
+
+</header>
+
+<main class="estadisticas-container">
+
+    <h2>Estadísticas deportivas</h2>
+
+    <section class="estadisticas-resumen">
+
+        <div class="card-estadistica">
+
+            <h3>⚽ Partidos</h3>
+
+            <p id="cantidadPartidos">0</p>
+
+        </div>
+
+        <div class="card-estadistica">
+
+            <h3>🥅 Goles</h3>
+
+            <p id="cantidadGoles">0</p>
+
+        </div>
+
+        <div class="card-estadistica">
+
+            <h3>🎯 Asistencias</h3>
+
+            <p id="cantidadAsistencias">0</p>
+
+        </div>
+
+        <div class="card-estadistica">
+
+            <h3>⏱️ Minutos</h3>
+
+            <p id="cantidadMinutos">0</p>
+
+        </div>
+
+    </section>
+
+    <section class="estadisticas-resumen">
+
+        <div class="card-estadistica">
+
+            <h3>🏆 Victorias</h3>
+
+            <p id="victorias">0</p>
+
+        </div>
+
+        <div class="card-estadistica">
+
+            <h3>🤝 Empates</h3>
+
+            <p id="empates">0</p>
+
+        </div>
+
+        <div class="card-estadistica">
+
+            <h3>❌ Derrotas</h3>
+
+            <p id="derrotas">0</p>
+
+        </div>
+
+        <div class="card-estadistica">
+
+            <h3>⚽ Promedio de goles</h3>
+
+            <p id="promedioGoles">0</p>
+
+        </div>
+
+    </section>
+
+    <section class="graficos">
+
+        <div class="grafico">
+
+            <h3>Resultados obtenidos</h3>
+
+            <canvas id="graficoResultados"></canvas>
+
+        </div>
+
+        <div class="grafico">
+
+            <h3>Goles por mes</h3>
+
+            <canvas id="graficoGolesMes"></canvas>
+
+        </div>
+
+    </section>
+
+    <section class="graficos">
+
+        <div class="grafico">
+
+            <h3>Participación por posición</h3>
+
+            <canvas id="graficoPosiciones"></canvas>
+
+        </div>
+
+        <div class="grafico">
+
+            <h3>Minutos jugados por mes</h3>
+
+            <canvas id="graficoMinutos"></canvas>
+
+        </div>
+
+    </section>
+
+    <section class="estadisticas-detalladas">
+
+        <h2>Resumen de rendimiento</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Métrica</th>
+
+                    <th>Valor</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>Promedio de goles por partido</td>
+
+                    <td id="promedioPartido">0</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Promedio de asistencias</td>
+
+                    <td id="promedioAsistencias">0</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Promedio de minutos</td>
+
+                    <td id="promedioMinutos">0</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Porcentaje de victorias</td>
+
+                    <td id="porcentajeVictorias">0%</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Porcentaje de derrotas</td>
+
+                    <td id="porcentajeDerrotas">0%</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Porcentaje de empates</td>
+
+                    <td id="porcentajeEmpates">0%</td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="module" src="js/estadisticas.js"></script>
+
+</body>
+
+</html>
