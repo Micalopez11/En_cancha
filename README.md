@@ -1,6 +1,6 @@
 # Conecta Fútbol Amateur
 
-Conecta Fútbol Amateur es un prototipo web pensado para jugadoras amateurs que necesitan registrar sus partidos, torneos, estadísticas deportivas y canchas donde jugaron.
+En cancha es un prototipo web pensado para jugadoras amateurs que necesitan registrar sus partidos, torneos, estadísticas deportivas y canchas donde jugaron.
 
 El proyecto fue desarrollado como parte del trabajo de Computación en la Nube.
 
@@ -36,7 +36,7 @@ El proyecto fue desarrollado como parte del trabajo de Computación en la Nube.
 ## Estructura del proyecto
 
 ```text
-Conecta-Futbol/
+En cancha /
 │
 ├── index.html
 ├── registro.html
