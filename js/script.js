@@ -91,5 +91,8 @@ async function guardarPartido() {
 
 // Estadísticas
 async function cargarEstadisticas() {
-  const { data: partidos } = await supabase.from("partidos").select("*");
+    const { data: partidos } = await supabase.from("partidos").select("*");
   const total
+  }
+
+  }
