@@ -30,16 +30,7 @@ async function registrarJugadora(evento) {
   const edad = Number(document.getElementById("edad").value);
   const posicion = document.getElementById("posicion").value;
 
-  // Datos adicionales del perfil
-  const pierna = document.getElementById("pierna").value;
-  const altura = Number(document.getElementById("altura").value);
-  const equipo = document.getElementById("equipo").value.trim();
-  const provincia = document.getElementById("provincia").value.trim();
-  const bio = document.getElementById("bio").value.trim();
-
-  if (mensaje) {
-    mensaje.textContent = "Registrando...";
-  }
+  mensaje.textContent = "Registrando...";
 
   try {
     // Crea el usuario en Firebase Authentication
@@ -51,24 +42,17 @@ async function registrarJugadora(evento) {
 
     const usuario = credencial.user;
 
-    // Guarda el perfil completo en Firestore
+    // Guarda el perfil en Firestore
     await setDoc(doc(db, "jugadoras", usuario.uid), {
       uid: usuario.uid,
       nombre: nombre,
       email: email,
       edad: edad,
       posicion: posicion,
-      pierna: pierna,
-      altura: altura,
-      equipo: equipo,
-      provincia: provincia,
-      bio: bio,
       fechaRegistro: serverTimestamp()
     });
 
-    if (mensaje) {
-      mensaje.textContent = "Registro realizado correctamente.";
-    }
+    mensaje.textContent = "Registro realizado correctamente.";
 
     formulario.reset();
 
@@ -77,11 +61,7 @@ async function registrarJugadora(evento) {
     }, 1000);
 
   } catch (error) {
-    console.error("Error al registrar:", error);
-
-    if (!mensaje) {
-      return;
-    }
+    console.error(error);
 
     switch (error.code) {
       case "auth/email-already-in-use":
@@ -104,13 +84,7 @@ async function registrarJugadora(evento) {
           "Debés activar Email/Password en Firebase Authentication.";
         break;
 
-      case "auth/network-request-failed":
-        mensaje.textContent =
-          "No se pudo conectar con Firebase. Revisá tu conexión o las extensiones del navegador.";
-        break;
-
       case "permission-denied":
-      case "firestore/permission-denied":
         mensaje.textContent =
           "Firestore no permitió guardar el perfil. Revisá las reglas.";
         break;
