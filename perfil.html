@@ -2,15 +2,16 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Mi Perfil | En cancha</title>
 
-    <link rel="stylesheet" href="css/styles.css">
-
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body>
@@ -18,23 +19,20 @@
     <header class="navbar">
 
         <div class="logo">
-
             <span>⚽</span>
-
             <h1>En cancha</h1>
-
         </div>
 
         <nav>
+            <a href="./dashboard.html">Dashboard</a>
 
-            <a href="dashboard.html">Dashboard</a>
-
-            <button id="cerrarSesion" class="btn-nav">
-
+            <button
+                id="cerrarSesion"
+                class="btn-nav"
+                type="button"
+            >
                 Cerrar sesión
-
             </button>
-
         </nav>
 
     </header>
@@ -46,28 +44,21 @@
             <div class="perfil-header">
 
                 <div class="foto-perfil">
-
                     <img
                         id="fotoPerfil"
-                        src="assets/img/default-profile.png"
-                        alt="Foto de perfil">
-
+                        src="./assets/img/default-profile.png"
+                        alt="Foto de perfil"
+                    >
                 </div>
 
                 <div>
-
                     <h2 id="nombreUsuario">
-
                         Nombre de la Jugadora
-
                     </h2>
 
                     <p id="equipoActual">
-
                         Equipo actual
-
                     </p>
-
                 </div>
 
             </div>
@@ -77,150 +68,181 @@
                 <div class="grid-formulario">
 
                     <div class="grupo-input">
-
-                        <label>Nombre completo</label>
+                        <label for="nombre">
+                            Nombre completo
+                        </label>
 
                         <input
                             type="text"
-                            id="nombre">
-
+                            id="nombre"
+                        >
                     </div>
 
                     <div class="grupo-input">
-
-                        <label>Email</label>
+                        <label for="email">
+                            Email
+                        </label>
 
                         <input
                             type="email"
                             id="email"
-                            readonly>
-
+                            readonly
+                        >
                     </div>
 
                     <div class="grupo-input">
-
-                        <label>Edad</label>
+                        <label for="edad">
+                            Edad
+                        </label>
 
                         <input
                             type="number"
-                            id="edad">
-
+                            id="edad"
+                            min="1"
+                        >
                     </div>
 
                     <div class="grupo-input">
-
-                        <label>Altura (cm)</label>
+                        <label for="altura">
+                            Altura (cm)
+                        </label>
 
                         <input
                             type="number"
-                            id="altura">
-
+                            id="altura"
+                            min="1"
+                        >
                     </div>
 
                     <div class="grupo-input">
-
-                        <label>Peso (kg)</label>
+                        <label for="peso">
+                            Peso (kg)
+                        </label>
 
                         <input
                             type="number"
-                            id="peso">
-
+                            id="peso"
+                            min="1"
+                            step="0.1"
+                        >
                     </div>
 
                     <div class="grupo-input">
-
-                        <label>Posición</label>
+                        <label for="posicion">
+                            Posición
+                        </label>
 
                         <select id="posicion">
+                            <option value="">
+                                Seleccionar posición
+                            </option>
 
-                            <option>Arquera</option>
+                            <option value="Arquera">
+                                Arquera
+                            </option>
 
-                            <option>Defensora</option>
+                            <option value="Defensora">
+                                Defensora
+                            </option>
 
-                            <option>Mediocampista</option>
+                            <option value="Mediocampista">
+                                Mediocampista
+                            </option>
 
-                            <option>Delantera</option>
-
+                            <option value="Delantera">
+                                Delantera
+                            </option>
                         </select>
-
                     </div>
 
                     <div class="grupo-input">
-
-                        <label>Pierna hábil</label>
+                        <label for="pierna">
+                            Pierna hábil
+                        </label>
 
                         <select id="pierna">
+                            <option value="">
+                                Seleccionar pierna hábil
+                            </option>
 
-                            <option>Derecha</option>
+                            <option value="Derecha">
+                                Derecha
+                            </option>
 
-                            <option>Izquierda</option>
+                            <option value="Izquierda">
+                                Izquierda
+                            </option>
 
-                            <option>Ambas</option>
-
+                            <option value="Ambas">
+                                Ambas
+                            </option>
                         </select>
-
                     </div>
 
                     <div class="grupo-input">
-
-                        <label>Equipo actual</label>
+                        <label for="equipo">
+                            Equipo actual
+                        </label>
 
                         <input
                             type="text"
-                            id="equipo">
-
+                            id="equipo"
+                        >
                     </div>
 
                     <div class="grupo-input">
-
-                        <label>Provincia</label>
+                        <label for="provincia">
+                            Provincia
+                        </label>
 
                         <input
                             type="text"
-                            id="provincia">
-
+                            id="provincia"
+                        >
                     </div>
 
                     <div class="grupo-input">
-
-                        <label>Ciudad</label>
+                        <label for="ciudad">
+                            Ciudad
+                        </label>
 
                         <input
                             type="text"
-                            id="ciudad">
-
+                            id="ciudad"
+                        >
                     </div>
 
                 </div>
 
                 <div class="grupo-input">
-
-                    <label>Biografía deportiva</label>
+                    <label for="bio">
+                        Biografía deportiva
+                    </label>
 
                     <textarea
                         id="bio"
                         rows="5"
-                        placeholder="Contanos sobre tu experiencia deportiva..."></textarea>
-
+                        placeholder="Contanos sobre tu experiencia deportiva..."
+                    ></textarea>
                 </div>
 
                 <div class="grupo-input">
-
-                    <label>Foto de perfil</label>
+                    <label for="foto">
+                        Foto de perfil
+                    </label>
 
                     <input
                         type="file"
                         id="foto"
-                        accept="image/*">
-
+                        accept="image/png, image/jpeg, image/webp"
+                    >
                 </div>
 
                 <button
                     class="btn-principal"
-                    type="submit">
-
+                    type="submit"
+                >
                     Guardar cambios
-
                 </button>
 
             </form>
@@ -234,35 +256,23 @@
             <div class="estadisticas-grid">
 
                 <div class="estadistica">
-
                     <h3>Partidos</h3>
-
                     <span id="partidos">0</span>
-
                 </div>
 
                 <div class="estadistica">
-
                     <h3>Goles</h3>
-
                     <span id="goles">0</span>
-
                 </div>
 
                 <div class="estadistica">
-
                     <h3>Asistencias</h3>
-
                     <span id="asistencias">0</span>
-
                 </div>
 
                 <div class="estadistica">
-
                     <h3>Torneos</h3>
-
                     <span id="torneos">0</span>
-
                 </div>
 
             </div>
@@ -271,8 +281,10 @@
 
     </main>
 
-   <!-- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> -->
-    <script type="module" src="./js/perfil.js"></script>
+    <script
+        type="module"
+        src="./js/perfil.js"
+    ></script>
 
 </body>
 

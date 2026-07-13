@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mi Perfil | En cancha</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+
+            <span>⚽</span>
+
+            <h1>En cancha</h1>
+
+        </div>
+
+        <nav>
+
+            <a href="dashboard.html">Dashboard</a>
+
+            <button id="cerrarSesion" class="btn-nav">
+
+                Cerrar sesión
+
+            </button>
+
+        </nav>
+
+    </header>
+
+    <main class="perfil-container">
+
+        <section class="perfil-card">
+
+            <div class="perfil-header">
+
+                <div class="foto-perfil">
+
+                    <img
+                        id="fotoPerfil"
+                        src="assets/img/default-profile.png"
+                        alt="Foto de perfil">
+
+                </div>
+
+                <div>
+
+                    <h2 id="nombreUsuario">
+
+                        Nombre de la Jugadora
+
+                    </h2>
+
+                    <p id="equipoActual">
+
+                        Equipo actual
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <form id="perfilForm">
+
+                <div class="grid-formulario">
+
+                    <div class="grupo-input">
+
+                        <label>Nombre completo</label>
+
+                        <input
+                            type="text"
+                            id="nombre">
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Email</label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            readonly>
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Edad</label>
+
+                        <input
+                            type="number"
+                            id="edad">
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Altura (cm)</label>
+
+                        <input
+                            type="number"
+                            id="altura">
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Peso (kg)</label>
+
+                        <input
+                            type="number"
+                            id="peso">
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Posición</label>
+
+                        <select id="posicion">
+
+                            <option>Arquera</option>
+
+                            <option>Defensora</option>
+
+                            <option>Mediocampista</option>
+
+                            <option>Delantera</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Pierna hábil</label>
+
+                        <select id="pierna">
+
+                            <option>Derecha</option>
+
+                            <option>Izquierda</option>
+
+                            <option>Ambas</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Equipo actual</label>
+
+                        <input
+                            type="text"
+                            id="equipo">
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Provincia</label>
+
+                        <input
+                            type="text"
+                            id="provincia">
+
+                    </div>
+
+                    <div class="grupo-input">
+
+                        <label>Ciudad</label>
+
+                        <input
+                            type="text"
+                            id="ciudad">
+
+                    </div>
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label>Biografía deportiva</label>
+
+                    <textarea
+                        id="bio"
+                        rows="5"
+                        placeholder="Contanos sobre tu experiencia deportiva..."></textarea>
+
+                </div>
+
+                <div class="grupo-input">
+
+                    <label>Foto de perfil</label>
+
+                    <input
+                        type="file"
+                        id="foto"
+                        accept="image/*">
+
+                </div>
+
+                <button
+                    class="btn-principal"
+                    type="submit">
+
+                    Guardar cambios
+
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="estadisticas-perfil">
+
+            <h2>Resumen deportivo</h2>
+
+            <div class="estadisticas-grid">
+
+                <div class="estadistica">
+
+                    <h3>Partidos</h3>
+
+                    <span id="partidos">0</span>
+
+                </div>
+
+                <div class="estadistica">
+
+                    <h3>Goles</h3>
+
+                    <span id="goles">0</span>
+
+                </div>
+
+                <div class="estadistica">
+
+                    <h3>Asistencias</h3>
+
+                    <span id="asistencias">0</span>
+
+                </div>
+
+                <div class="estadistica">
+
+                    <h3>Torneos</h3>
+
+                    <span id="torneos">0</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+   <!-- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> -->
+    <script type="module" src="./js/perfil.js"></script>
+
+</body>
+
+</html>
