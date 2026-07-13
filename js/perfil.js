@@ -1,106 +1,253 @@
-import {
-    protegerPagina,
-    configurarCerrarSesion
-} from "./auth.js";
+// js/perfil.js
+
+import { auth, db } from "./firebase.js";
 
 import {
-    cargarBaseDatos,
-    actualizarBaseDatos,
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+
+import {
+    doc,
+    getDoc,
+    setDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+import {
     obtenerPartidos,
     obtenerTorneos
 } from "./storage.js";
 
 // ==========================================================
-// INICIALIZACIÓN
+// VARIABLES GENERALES
 // ==========================================================
 
-const usuario = protegerPagina();
+let usuarioFirebase = null;
+let datosJugadora = null;
 
-configurarCerrarSesion();
-
-cargarPerfil();
+const perfilForm = document.getElementById("perfilForm");
+const botonCerrarSesion = document.getElementById("cerrarSesion");
 
 // ==========================================================
-// CARGAR PERFIL
+// INICIALIZACIÓN Y PROTECCIÓN DE LA PÁGINA
+// ==========================================================
+
+onAuthStateChanged(auth, async (usuario) => {
+
+    // Si no hay una sesión activa, vuelve al login
+    if (!usuario) {
+        window.location.href = "./login.html";
+        return;
+    }
+
+    usuarioFirebase = usuario;
+
+    await cargarPerfil();
+});
+
+// ==========================================================
+// CARGAR PERFIL DESDE FIRESTORE
 // ==========================================================
 
 async function cargarPerfil() {
 
-    document.getElementById("nombreUsuario").textContent = usuario.nombre;
-    document.getElementById("equipoActual").textContent = usuario.equipo || "Sin equipo registrado";
+    try {
+        const referenciaJugadora = doc(
+            db,
+            "jugadoras",
+            usuarioFirebase.uid
+        );
 
-    document.getElementById("nombre").value = usuario.nombre || "";
-    document.getElementById("email").value = usuario.email || "";
-    document.getElementById("edad").value = usuario.edad || "";
-    document.getElementById("altura").value = usuario.altura || "";
-    document.getElementById("peso").value = usuario.peso || "";
-    document.getElementById("posicion").value = usuario.posicion || "Volante";
-    document.getElementById("pierna").value = usuario.pierna || "Derecha";
-    document.getElementById("equipo").value = usuario.equipo || "";
-    document.getElementById("provincia").value = usuario.provincia || "";
-    document.getElementById("ciudad").value = usuario.ciudad || "";
-    document.getElementById("bio").value = usuario.bio || "";
+        const documentoJugadora = await getDoc(referenciaJugadora);
 
-    document.getElementById("fotoPerfil").src =
-        usuario.foto || "assets/img/default-profile.png";
+        if (!documentoJugadora.exists()) {
+            alert("No se encontró el perfil de la jugadora en Firebase.");
+            return;
+        }
 
-    await cargarResumenDeportivo();
+        datosJugadora = documentoJugadora.data();
 
+        // Encabezado del perfil
+        asignarTexto(
+            "nombreUsuario",
+            datosJugadora.nombre || "Jugadora"
+        );
+
+        asignarTexto(
+            "equipoActual",
+            datosJugadora.equipo || "Sin equipo registrado"
+        );
+
+        // Datos principales
+        asignarValor("nombre", datosJugadora.nombre);
+        asignarValor(
+            "email",
+            datosJugadora.email || usuarioFirebase.email
+        );
+        asignarValor("edad", datosJugadora.edad);
+        asignarValor("altura", datosJugadora.altura);
+        asignarValor("peso", datosJugadora.peso);
+        asignarValor("posicion", datosJugadora.posicion);
+        asignarValor("pierna", datosJugadora.pierna);
+        asignarValor("equipo", datosJugadora.equipo);
+        asignarValor("provincia", datosJugadora.provincia);
+        asignarValor("ciudad", datosJugadora.ciudad);
+        asignarValor("bio", datosJugadora.bio);
+
+        // Foto del perfil
+        const fotoPerfil = document.getElementById("fotoPerfil");
+
+        if (fotoPerfil) {
+            fotoPerfil.src =
+                datosJugadora.foto ||
+                "./assets/img/default-profile.png";
+        }
+
+        await cargarResumenDeportivo();
+
+    } catch (error) {
+        console.error("Error al cargar el perfil:", error);
+        alert("No se pudieron cargar los datos del perfil.");
+    }
 }
 
 // ==========================================================
-// ACTUALIZAR PERFIL
+// ACTUALIZAR PERFIL EN FIRESTORE
 // ==========================================================
 
-const perfilForm = document.getElementById("perfilForm");
+if (perfilForm) {
 
-perfilForm.addEventListener("submit", async function (event) {
-    event.preventDefault();
+    perfilForm.addEventListener("submit", async function (event) {
 
-    const datos = await cargarBaseDatos();
+        event.preventDefault();
 
-    const indiceUsuario = datos.usuarios.findIndex(
-        u => u.email === usuario.email
-    );
+        if (!usuarioFirebase) {
+            alert("No hay una sesión activa.");
+            return;
+        }
 
-    if (indiceUsuario === -1) {
-        alert("No se encontró el usuario");
-        return;
-    }
+        const botonGuardar = perfilForm.querySelector(
+            'button[type="submit"]'
+        );
 
-    const usuarioActualizado = {
-        ...datos.usuarios[indiceUsuario],
-        nombre: document.getElementById("nombre").value,
-        edad: document.getElementById("edad").value,
-        altura: document.getElementById("altura").value,
-        peso: document.getElementById("peso").value,
-        posicion: document.getElementById("posicion").value,
-        pierna: document.getElementById("pierna").value,
-        equipo: document.getElementById("equipo").value,
-        provincia: document.getElementById("provincia").value,
-        ciudad: document.getElementById("ciudad").value,
-        bio: document.getElementById("bio").value
-    };
+        if (botonGuardar) {
+            botonGuardar.disabled = true;
+            botonGuardar.textContent = "Guardando...";
+        }
 
-    const archivoFoto = document.getElementById("foto").files[0];
+        try {
+            const usuarioActualizado = {
+                uid: usuarioFirebase.uid,
 
-    if (archivoFoto) {
-        usuarioActualizado.foto = await convertirImagenABase64(archivoFoto);
-    }
+                nombre: obtenerValor("nombre"),
 
-    datos.usuarios[indiceUsuario] = usuarioActualizado;
+                // El correo se mantiene desde Authentication
+                email:
+                    obtenerValor("email") ||
+                    usuarioFirebase.email,
 
-    await actualizarBaseDatos(datos);
+                edad: obtenerNumeroONull("edad"),
+                altura: obtenerNumeroONull("altura"),
+                peso: obtenerNumeroONull("peso"),
 
-    sessionStorage.setItem(
-        "usuarioActivo",
-        JSON.stringify(usuarioActualizado)
-    );
+                posicion: obtenerValor("posicion"),
+                pierna: obtenerValor("pierna"),
+                equipo: obtenerValor("equipo"),
+                provincia: obtenerValor("provincia"),
+                ciudad: obtenerValor("ciudad"),
+                bio: obtenerValor("bio"),
 
-    alert("Perfil actualizado correctamente");
+                ultimaActualizacion: serverTimestamp()
+            };
 
-    window.location.reload();
-});
+            // Procesar foto, si se eligió una
+            const inputFoto = document.getElementById("foto");
+            const archivoFoto = inputFoto?.files?.[0];
+
+            if (archivoFoto) {
+
+                // Evita imágenes demasiado grandes en Firestore
+                if (archivoFoto.size > 700000) {
+                    alert(
+                        "La imagen es demasiado grande. Elegí una imagen menor a 700 KB."
+                    );
+
+                    return;
+                }
+
+                usuarioActualizado.foto =
+                    await convertirImagenABase64(archivoFoto);
+            }
+
+            const referenciaJugadora = doc(
+                db,
+                "jugadoras",
+                usuarioFirebase.uid
+            );
+
+            /*
+             * merge: true actualiza los campos existentes
+             * sin eliminar fechaRegistro u otros datos.
+             */
+            await setDoc(
+                referenciaJugadora,
+                usuarioActualizado,
+                { merge: true }
+            );
+
+            datosJugadora = {
+                ...datosJugadora,
+                ...usuarioActualizado
+            };
+
+            alert("Perfil actualizado correctamente.");
+
+            window.location.reload();
+
+        } catch (error) {
+            console.error("Error al actualizar el perfil:", error);
+
+            if (
+                error.code === "permission-denied" ||
+                error.code === "firestore/permission-denied"
+            ) {
+                alert(
+                    "Firebase no permitió actualizar el perfil. Revisá las reglas de Firestore."
+                );
+            } else {
+                alert("No se pudo actualizar el perfil.");
+            }
+
+        } finally {
+
+            if (botonGuardar) {
+                botonGuardar.disabled = false;
+                botonGuardar.textContent = "Guardar cambios";
+            }
+        }
+    });
+}
+
+// ==========================================================
+// CERRAR SESIÓN
+// ==========================================================
+
+if (botonCerrarSesion) {
+
+    botonCerrarSesion.addEventListener("click", async function () {
+
+        try {
+            await signOut(auth);
+
+            window.location.href = "./login.html";
+
+        } catch (error) {
+            console.error("Error al cerrar sesión:", error);
+            alert("No se pudo cerrar la sesión.");
+        }
+    });
+}
 
 // ==========================================================
 // RESUMEN DEPORTIVO
@@ -108,32 +255,135 @@ perfilForm.addEventListener("submit", async function (event) {
 
 async function cargarResumenDeportivo() {
 
-    const partidos = await obtenerPartidos();
-    const torneos = await obtenerTorneos();
+    try {
+        const partidos = await obtenerPartidos();
+        const torneos = await obtenerTorneos();
 
-    const partidosUsuario = partidos.filter(
-        partido => partido.email === usuario.email
-    );
+        /*
+         * Por ahora se filtra por email porque tus partidos
+         * y torneos anteriores se guardaban de esa manera.
+         */
+        const partidosUsuario = partidos.filter(
+            partido =>
+                partido.email ===
+                (
+                    datosJugadora.email ||
+                    usuarioFirebase.email
+                )
+        );
 
-    const torneosUsuario = torneos.filter(
-        torneo => torneo.email === usuario.email
-    );
+        const torneosUsuario = torneos.filter(
+            torneo =>
+                torneo.email ===
+                (
+                    datosJugadora.email ||
+                    usuarioFirebase.email
+                )
+        );
 
-    const totalGoles = partidosUsuario.reduce(
-        (total, partido) => total + Number(partido.goles),
-        0
-    );
+        const totalGoles = partidosUsuario.reduce(
+            (total, partido) =>
+                total + (Number(partido.goles) || 0),
+            0
+        );
 
-    const totalAsistencias = partidosUsuario.reduce(
-        (total, partido) => total + Number(partido.asistencias),
-        0
-    );
+        const totalAsistencias = partidosUsuario.reduce(
+            (total, partido) =>
+                total + (Number(partido.asistencias) || 0),
+            0
+        );
 
-    document.getElementById("partidos").textContent = partidosUsuario.length;
-    document.getElementById("goles").textContent = totalGoles;
-    document.getElementById("asistencias").textContent = totalAsistencias;
-    document.getElementById("torneos").textContent = torneosUsuario.length;
+        asignarTexto(
+            "partidos",
+            partidosUsuario.length
+        );
 
+        asignarTexto(
+            "goles",
+            totalGoles
+        );
+
+        asignarTexto(
+            "asistencias",
+            totalAsistencias
+        );
+
+        asignarTexto(
+            "torneos",
+            torneosUsuario.length
+        );
+
+    } catch (error) {
+        console.error(
+            "Error al cargar el resumen deportivo:",
+            error
+        );
+
+        asignarTexto("partidos", 0);
+        asignarTexto("goles", 0);
+        asignarTexto("asistencias", 0);
+        asignarTexto("torneos", 0);
+    }
+}
+
+// ==========================================================
+// FUNCIONES AUXILIARES
+// ==========================================================
+
+function asignarValor(id, valor) {
+
+    const elemento = document.getElementById(id);
+
+    if (!elemento) {
+        return;
+    }
+
+    elemento.value =
+        valor !== undefined &&
+        valor !== null
+            ? valor
+            : "";
+}
+
+function asignarTexto(id, valor) {
+
+    const elemento = document.getElementById(id);
+
+    if (!elemento) {
+        return;
+    }
+
+    elemento.textContent =
+        valor !== undefined &&
+        valor !== null
+            ? valor
+            : "";
+}
+
+function obtenerValor(id) {
+
+    const elemento = document.getElementById(id);
+
+    if (!elemento) {
+        return "";
+    }
+
+    return elemento.value.trim();
+}
+
+function obtenerNumeroONull(id) {
+
+    const valor = obtenerValor(id);
+
+    if (valor === "") {
+        return null;
+    }
+
+    const numero = Number(valor);
+
+    return Number.isNaN(numero)
+        ? null
+        : numero;
 }
 
 // ==========================================================
@@ -148,10 +398,14 @@ function convertirImagenABase64(archivo) {
 
         lector.onload = () => resolve(lector.result);
 
-        lector.onerror = error => reject(error);
+        lector.onerror = () => {
+            reject(
+                new Error(
+                    "No se pudo procesar la imagen seleccionada."
+                )
+            );
+        };
 
         lector.readAsDataURL(archivo);
-
     });
-
 }
