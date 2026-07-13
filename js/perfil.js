@@ -1,5 +1,7 @@
 // js/perfil.js
 
+console.log("ESTOY EJECUTANDO EL PERFIL NUEVO");
+
 import { auth, db } from "./firebase.js";
 
 import {
@@ -61,12 +63,23 @@ async function cargarPerfil() {
 
         const documentoJugadora = await getDoc(referenciaJugadora);
 
+        console.log("UID autenticado:", usuarioFirebase.uid);
+
+        console.log("Existe documento:", documentoJugadora.exists());
+
+        console.log("Datos:", documentoJugadora.data());
+
         if (!documentoJugadora.exists()) {
             alert("No se encontró el perfil de la jugadora en Firebase.");
             return;
         }
 
         datosJugadora = documentoJugadora.data();
+
+
+        console.log("Nombre:", datosJugadora.nombre);
+        console.log("Equipo:", datosJugadora.equipo);
+        console.log("Posición:", datosJugadora.posicion);
 
         // Encabezado del perfil
         asignarTexto(
