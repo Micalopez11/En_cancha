@@ -14,10 +14,10 @@ import {
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
-import {
-    obtenerPartidos,
-    obtenerTorneos
-} from "./storage.js";
+//import {
+ //   obtenerPartidos,
+ //   obtenerTorneos
+//} from "./storage.js";
 
 // ==========================================================
 // VARIABLES GENERALES
