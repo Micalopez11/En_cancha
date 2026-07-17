@@ -1,7 +1,5 @@
 // js/perfil.js
 
-console.log("ESTOY EJECUTANDO EL PERFIL NUEVO");
-
 import { auth, db } from "./firebase.js";
 
 import {
